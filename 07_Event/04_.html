@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async Color Box</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column; /* fix: stack elements vertically */
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f3f3f3;
+      }
+
+      #box {
+        width: 400px;
+        height: 400px;
+        background-color: lightgray;
+        border: 2px solid #333;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        transition: background-color 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+      }
+
+      .btn:hover {
+        background-color: #0056b3;
+      }
+
+      #cbox {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        max-width: 80%;
+        margin-top: 20px;
+      }
+
+      #cbox div {
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+      }
+
+      /* optional: center buttons container */
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">#FFFFFF</div>
+    <div class="btn-container">
+      <button class="btn" id="start">Start</button>
+      <button class="btn" id="stop">Stop</button>
+    </div>
+    <div id="cbox"></div>
+
+    <script>
+      // Function to generate random hex color
+      const RandomColor = function () {
+        const hex = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          let hexIndex = Math.floor(Math.random() * hex.length);
+          color += hex[hexIndex];
+        }
+        return color;
+      };
+
+      const colorbox = document.querySelector("#cbox");
+
+      function MakeColorDiv(HexCode) {
+        const colordiv = document.createElement("div");
+        colordiv.style.backgroundColor = HexCode;
+        colordiv.textContent = HexCode;
+        colorbox.appendChild(colordiv);
+      }
+
+      const box = document.querySelector("#box");
+      const startBtn = document.querySelector("#start");
+      const stopBtn = document.querySelector("#stop");
+      const ColorArray = [];
+      let colorInterval;
+
+      startBtn.addEventListener("click", () => {
+        if (!colorInterval) {
+          colorInterval = setInterval(() => {
+            let color = RandomColor();
+            MakeColorDiv(color);
+            ColorArray.push(color);
+            box.style.backgroundColor = color;
+            box.textContent = color;
+          }, 1500); // fix: 1500ms = 1.5 seconds
+        }
+      });
+
+      stopBtn.addEventListener("click", () => {
+        clearInterval(colorInterval);
+        colorInterval = null;
+        console.log("Colors Generated:", ColorArray);
+      });
+    </script>
+  </body>
+</html>

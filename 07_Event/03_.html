@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Async</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chai Aur Code</h1>
+  <h2></h2>
+  <button id="stop">Stop</button>
+
+  <script>
+    let count = 0;
+    const h1Text = document.querySelector('h1');
+    const h2Text = document.querySelector('h2');
+    const StopText = document.querySelector('#stop');
+
+    // Timer to change h1 text after 11 seconds
+    const NameTimer = setTimeout(function() {
+      h1Text.textContent = "Kunal is Coding in VSCode For AI App Generation";
+    }, 11000);
+
+    // Interval to show countdown message
+    const CountTimer = setInterval(function() {
+      h2Text.innerText = `After 10 sec heading will change. You can stop it: ${++count}s`; 
+    }, 1000);
+
+    StopText.addEventListener('click', function() {
+      if(count > 10) {
+        h2Text.textContent = "Not possible to change now...";
+        clearInterval(CountTimer);
+        clearTimeout(NameTimer);
+      } else {
+        h2Text.textContent = "You clicked stop button before 10 sec!";
+        clearTimeout(NameTimer);
+        clearInterval(CountTimer);
+      }
+      // Disable button after clicking
+      StopText.disabled = true;
+    });
+  </script>
+</body>
+</html>

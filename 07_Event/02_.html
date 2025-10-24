@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async</title>
+  </head>
+  <body>
+    <h1>Async Function Tutorials: Code</h1>
+    <button id="stop">Stop</button>
+
+    <script>
+      const dialog = [
+        "Hi Everyone",
+        "How Are You",
+        "I Hope You Will See this Amazing Code...",
+      ];
+
+      const place = document.querySelector("h1");
+      let index = 0;
+      let intervalId;
+
+      function talk() {
+        // Show the next dialog text
+        place.textContent = dialog[index];
+        index++;
+
+        // If we've reached the end, stop the interval
+        if (index === dialog.length) {
+          clearInterval(intervalId);
+        }
+      }
+
+      // Run 'talk' every 1 second
+      intervalId = setInterval(talk, 5000);
+
+      // Stop button to manually stop
+      document.getElementById("stop").addEventListener("click", () => {
+        clearInterval(intervalId);
+        place.textContent = "Stopped!"; 
+      });
+    </script>
+  </body>
+</html>
