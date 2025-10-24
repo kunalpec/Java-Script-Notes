@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Events</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      li {
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      li:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .li-img img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Amazing Images</h2>
+    <div>
+      <ul id="image">
+        <li class="li-img">
+          <img
+            src="https://images.pexels.com/photos/27799203/pexels-photo-27799203.jpeg"
+            alt="Image 1"
+            id="imag-1"
+          />
+        </li>
+        <li class="li-img">
+          <img
+            src="https://images.pexels.com/photos/30641038/pexels-photo-30641038.jpeg"
+            alt="Image 2"
+            id="imag-2"
+          />
+        </li>
+        <li class="li-img">
+          <img
+            src="https://images.pexels.com/photos/34203370/pexels-photo-34203370.jpeg"
+            alt="Image 3"
+            id="imag-3"
+          />
+        </li>
+        <li class="li-img">
+          <img
+            src="https://images.pexels.com/photos/11315828/pexels-photo-11315828.jpeg"
+            alt="Image 4"
+            id="imag-4"
+          />
+        </li>
+        <li class="li-img">
+          <img
+            src="https://images.pexels.com/photos/20779983/pexels-photo-20779983.jpeg"
+            alt="Image 5"
+            id="imag-5"
+          />
+        </li>
+        <li class="li-img">
+          <img
+            src="https://images.pexels.com/photos/34372131/pexels-photo-34372131.jpeg"
+            alt="Image 6"
+            id="imag-6"
+          />
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    // document.getElementById("imag-5").onclick=function()
+    // {
+    //   alert("imag-5");
+    // }
+    // attachEvent()
+    // jQuery- On
+
+    // types,timestamp,defaultPrevented
+    // target,toElement,scrElement,currentTarget
+    // clientX,clientY,screenX,screenY
+    // altKey,ctrlKey,shiftKey,KeyCode
+
+    // document.getElementById('imag-6').addEventListener('click',function(event){
+    //   console.log(event);
+    // },false);
+
+    // event propogation(True,false);
+
+    // document.getElementById('image').addEventListener('click',function(event){
+    //   console.log("parent");
+    // },false);
+
+    // document.getElementById('imag-6').addEventListener('click',function(event){
+    //   console.log("child");
+    // },false);
+
+    // document.getElementById('image').addEventListener('click',function(event){
+    //   console.log("parent");
+    // },true);
+
+    // document.getElementById('imag-6').addEventListener('click',function(event){
+    //   console.log("child");
+    // },true);
+
+    // document.querySelector("#image").addEventListener('click',function(event){
+    //   console.log("event:",event)
+    //   const removeIt=event.target.parentNode;
+    //   removeIt.remove();
+    // });
+
+    document
+      .querySelector("#image")
+      .addEventListener("click", function (event) {
+        console.log("event:", event);
+        const removeIt = event.target.parentNode;
+        console.log(event.target.tagName);
+        if (event.target.tagName === "IMG") {
+          removeIt.remove();
+        }
+      });
+  </script>
+</html>

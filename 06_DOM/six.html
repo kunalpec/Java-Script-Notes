@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital | Clock</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      user-select: none;
+    }
+    #clock {
+      font-size: 48px;
+      font-weight: bold;
+      user-select: none;
+    }
+    #local-time {
+      font-size: 24px;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Digital Clock:</h1>
+  <h2 id="local-time">Your Local Time:</h2>
+  <div id="clock"></div>
+</body>
+<script>
+  const clockElement= document.getElementById('clock');
+  const localTimeElement= document.getElementById('local-time');
+
+  function updateClock(){
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+
+    localTimeElement.textContent = `Your Local Time: ${now.toLocaleString()}`;
+  }
+  console.log(updateClock());
+  console.log(updateClock);
+  setInterval(updateClock, 1000);
+</script>
+</html>

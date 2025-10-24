@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess The Number</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+        background-color: #d4edda; /* light green */
+      }
+
+      h1 {
+        color: #155724;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      #guess-input {
+        padding: 8px;
+        font-size: 16px;
+        width: 180px;
+        margin-left: 5px;
+      }
+
+      #submit-button {
+        padding: 8px 15px;
+        font-size: 16px;
+        margin-left: 10px;
+        cursor: pointer;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+      }
+
+      #submit-button:hover {
+        background-color: #218838;
+      }
+
+      .result,
+      .message {
+        margin-top: 15px;
+        font-size: 18px;
+      }
+
+      #result {
+        font-weight: bold;
+        color: #0ad6188b;
+      }
+
+      #previous-guesses {
+        font-weight: bold;
+        color: #007bff;
+      }
+
+      .total-guess {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #6c757d;
+      }
+
+      #total-guesses {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Guess The Number Game</h1>
+    <p>Guess a number between 1 and 100:</p>
+
+    <form>
+      <label for="guess-input">Your Guess:</label>
+      <input type="text" id="guess-input" placeholder="Enter your guess" />
+      <button type="submit" id="submit-button">Guess</button>
+    </form>
+
+    <div class="result">Result: <span id="result"></span></div>
+
+    <div class="message">
+      Previous Guesses: <span id="previous-guesses"></span>
+    </div>
+
+    <div class="total-guess">
+      Total Guesses: <span id="total-guesses">10</span>
+    </div>
+
+    <script>
+      const guessInput = document.getElementById("guess-input");
+      const submitButton = document.getElementById("submit-button");
+      const resultElement = document.getElementById("result");
+      const previousGuessesElement = document.getElementById("previous-guesses");
+      const totalGuessesElement = document.getElementById("total-guesses");
+
+      let randomNumber = Math.floor(Math.random() * 100) + 1;
+      let previousGuesses = [];
+      let totalGuesses = 0;
+      const maxGuesses = 10;
+      let canPlay = true;
+
+      function validGuess(guess) {
+        if (isNaN(guess) || guess < 1 || guess > 100) {
+          resultElement.textContent = "Please enter a number between 1 and 100.";
+          return false;
+        }
+        if (previousGuesses.includes(guess)) {
+          resultElement.textContent = "You already guessed this number!";
+          return false;
+        }
+        return true;
+      }
+
+      function checkGuess(guess) {
+        previousGuesses.push(guess);
+        previousGuessesElement.textContent = previousGuesses.join(", ");
+        totalGuesses++;
+        totalGuessesElement.textContent = maxGuesses - totalGuesses;
+
+        if (guess === randomNumber) {
+          resultElement.textContent = "🎉 Congratulations! You've guessed the number!";
+          canPlay = false;
+        } else if (totalGuesses >= maxGuesses) {
+          resultElement.textContent = `Game over! The number was ${randomNumber}.`;
+          canPlay = false;
+        } else if (guess < randomNumber) {
+          resultElement.textContent = "📈 Too low! Try again.";
+        } else {
+          resultElement.textContent = "📉 Too high! Try again.";
+        }
+
+        if (!canPlay) {
+          guessInput.disabled = true;
+          submitButton.disabled = true;
+        }
+
+        guessInput.value = "";
+        guessInput.focus();
+      }
+
+      document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!canPlay) return;
+
+        const userGuess = Number(guessInput.value);
+        if (!validGuess(userGuess)) return;
+
+        checkGuess(userGuess);
+      });
+    </script>
+  </body>
+</html>

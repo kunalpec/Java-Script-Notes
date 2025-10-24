@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>color | palate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      user-select: none;
+
+    }
+    .button {
+      display: inline-block;
+      user-select: none;
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #color1 { background-color: #FF5733; }
+    #color2 { background-color: #33FF57; }
+    #color3 { background-color: #3357FF; }
+    #color4 { background-color: #F1C40F; }
+    #color5 { background-color: #8E44AD; }
+    #color6 { background-color: #E67E22; }
+    #color7 { background-color: #2ECC71; }
+    #color8 { background-color: #3498DB; }
+  </style>
+</head>
+<body>
+  <h1>The Color Selection Area:</h1>
+  <div class="button" id="color1"></div>
+  <div class="button" id="color2"></div>
+  <div class="button" id="color3"></div>
+  <div class="button" id="color4"></div>
+  <div class="button" id="color5"></div>
+  <div class="button" id="color6"></div>
+  <div class="button" id="color7"></div>
+  <div class="button" id="color8"></div>
+</body>
+<script>
+  const buttons= document.querySelectorAll('.button');
+  const body = document.querySelector('body');
+
+  buttons.forEach((button)=>{
+    console.log(button);
+    button.addEventListener('click',(event)=>{
+      console.log(event.target);
+      const color = window.getComputedStyle(event.target).backgroundColor;
+      console.log(color);
+      body.style.backgroundColor = color;
+    });
+  });
+</script>
+</html>
