@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Key Capture</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+        background-color: black;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Press any key...</h1>
+
+    <script>
+      const textArea = document.querySelector("h1");
+
+      document.addEventListener("keydown", (event) => {
+        // Stop the browser's default shortcut behavior
+        event.preventDefault();
+
+        // Detect if Ctrl, Shift, or Alt are pressed
+        let combo = "";
+        if (event.ctrlKey) combo += "Ctrl + ";
+        if (event.shiftKey) combo += "Shift + ";
+        if (event.altKey) combo += "Alt + ";
+
+        // Show which key was pressed
+        textArea.textContent = `You pressed: ${combo}${event.key} | ----Code${event.code}`;
+      });
+    </script>
+  </body>
+</html>
